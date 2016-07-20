@@ -8,6 +8,7 @@ RUN \
   apt-get update && \
   apt-get -y upgrade && \
   locale-gen en_US.UTF-8
+
 RUN apt-get install -y \
   curl \
   git \
@@ -42,6 +43,9 @@ ADD id_ssh.pub /root/.ssh/authorized_keys
 ADD supervisor.conf /etc/supervisor/supervisord.conf
 ADD sshd.conf /etc/supervisor/conf.d/sshd.conf
 ADD deploy.sh /bin/deploy.sh
+RUN chmod 600 /root/.ssh/deployment
+RUN chmod 700 /root/.ssh/gitwrapper.sh
+RUN chmod 600 /root/.ssh/authorized_keys
 
 EXPOSE 22
 
